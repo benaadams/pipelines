@@ -2,12 +2,18 @@
 
 ## What is it?
 
-System.IO.Pipelines is a new library that is designed for doing high performance IO in .NET. It's new in .NET Core 2.1 and is a netstandard library that works on all .NET implementations. It was born from the work the .NET Core team did to make Kestrel one of the fastest web servers in the industry. What started as an implementation detail inside of Kestrel progressed into a re-usable API that shipped in 2.1 as a first class BCL API (System.IO.Pipelines) available for all .NET developers. Today Pipelines powers Kestrel and SignalR and we hope to see it at the center of many networking libraries and components from the .NET community. 
+System.IO.Pipelines is a new library that is designed for doing high performance IO in .NET. It's new in .NET Core 2.1 and is a netstandard library that works on all .NET implementations. 
+
+System.IO.Pipelines was born from the work the .NET Core team did to make Kestrel one of the fastest web servers in the industry. What started as an implementation detail inside of Kestrel progressed into a re-usable API that shipped in 2.1 as a first class BCL API (System.IO.Pipelines) available for all .NET developers. Today Pipelines powers Kestrel and SignalR and we hope to see it at the center of many networking libraries and components from the .NET community. 
 
 ## What problem does it solve? 
 
-Let's start with a simple problem. We want to write a TCP server that receives line based messages (delimited by \n) from a client. Correctly parsing data from a stream or socket involves a large amount of complex boilerplate code and has many corner cases. 
-Achieving high performance and being correct while also dealing this complexity is unnecessarily hard. Pipelines aims to solve this complexity. [Skip to the pipelines version](#tcp-server-with-systemiopipelines)
+Correctly parsing data from a stream or socket is dominated by boilerplate code and has many corner cases; leading to complex code. 
+Achieving high performance and being correct; while also dealing this complexity, is unnecessarily hard. Pipelines aims to solve this complexity. [Skip to the pipelines version](#tcp-server-with-systemiopipelines)
+
+## What extra complexity does Streams involve? 
+
+Let's start with a simple problem. We want to write a TCP server that receives line based messages (delimited by \n) from a client. 
 
 ### TCP Server with NetworkStream
 
